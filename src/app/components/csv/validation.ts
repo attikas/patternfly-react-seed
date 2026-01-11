@@ -1,26 +1,30 @@
 import { CsvRow } from './csv';
+import { ValidationResult } from './types';
 
-export type ErrorMap = {
-  [row: number]: {
-    [col: number]: { message: string };
-  };
-};
+export function validateRows(rows?: CsvRow[], headerRow?: number): ValidationResult {
+  if (!Array.isArray(rows)) {
+    return { rowErrors: {}, cellErrors: {} };
+  }
 
-export function validateRows(rows: CsvRow[]): ErrorMap {
-  const errors: ErrorMap = {};
+  const rowErrors: RowErrorMap = {};
+  const cellErrors: CellErrorMap = {};
 
-  rows.forEach((row, r) =>
-    row.values.forEach((cell, c) => {
-      if (c === 0 && !cell.trim()) {
-        errors[r] ??= {};
-        errors[r][c] = { message: 'Required' };
+  rows.forEach((row, rowIndex) => {
+    if (!row || !Array.isArray(row.values)) {
+      return;
+    }
+
+    // Skip header row
+    if (headerRow !== undefined && rowIndex === headerRow) {
+      return;
+    }
+
+    row.values.forEach((value, colIndex) => {
+      if (!value || value.trim() === '') {
+        cellErrors[`${rowIndex}:${colIndex}`] = 'Value is required';
       }
-      if (c === 2 && Number.isNaN(Number(cell))) {
-        errors[r] ??= {};
-        errors[r][c] = { message: 'Must be numeric' };
-      }
-    }),
-  );
+    });
+  });
 
-  return errors;
+  return { rowErrors, cellErrors };
 }

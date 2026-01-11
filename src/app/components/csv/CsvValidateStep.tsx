@@ -29,6 +29,7 @@ export function CsvValidateStep({ rows, errors }: { rows: CsvRow[]; errors: Erro
   const [selectedCell, setSelectedCell] = useState<SelectedCell>();
   const [activeRadio, setActiveRadio] = useState<number | null>(null);
   const [inputs, setInputs] = useState<Record<BoxKey, VATBoxValue>>(boxInputs);
+  const [confirmed, setConfirmed] = useState(false);
 
   const updateInput = (id: number, value: string) => {
     setInputs((prev) => {
@@ -128,9 +129,13 @@ export function CsvValidateStep({ rows, errors }: { rows: CsvRow[]; errors: Erro
                 <Checkbox
                   id="confirm-checkbox"
                   label="I understand that by submitting this VAT information, I am making a legal declaration to HMRC that it is accurate and complete. False declarations may result in prosecution."
+                  isChecked={confirmed}
+                  onChange={(_, checked) => setConfirmed(checked)}
                 />
 
-                <Button variant="primary">Submit VAT to HMRC</Button>
+                <Button variant="primary" isDisabled={!confirmed}>
+                  Submit VAT to HMRC
+                </Button>
               </Form>
             </CardBody>
           </Card>

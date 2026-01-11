@@ -14,7 +14,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 
-import { ChunkedCsvTable } from './csv/ChunkedCsvTable';
+import { ChunkedCsvTable } from './csv/ChunkedCsvTable0';
 import { CsvRow } from './csv/csv';
 import { ErrorMap } from './csv/validation';
 

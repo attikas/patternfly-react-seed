@@ -17,7 +17,7 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 import { useState } from 'react';
-import { ChunkedCsvTable } from './ChunkedCsvTable';
+import { ChunkedCsvTable } from './ChunkedCsvTable0';
 import { CsvRow } from './csv';
 import { ErrorMap } from './validation';
 import { SelectedCell } from './selection';

@@ -115,7 +115,8 @@ export function ChunkedCsvTable({ rows, selectedCell, onCellSelect }: Props) {
                 key={`${tableId}-${row.id}-rownum`}
                 className="pf-v6-u-text-align-right"
                 style={{
-                  width: 48,
+                  width: 64,
+                  maxWidth: 64,
                   fontWeight: 600,
                   background: 'var(--pf-v6-global--palette--black-150)',
                   border: '1px solid var(--pf-v6-global--BorderColor--100)',

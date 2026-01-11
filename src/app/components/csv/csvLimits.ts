@@ -1,0 +1,5 @@
+export const CSV_LIMITS = {
+  MAX_ROWS: 1000,
+  MAX_COLUMNS: 100,
+  MAX_FILE_SIZE_BYTES: 1000 * 1024, // 1000 KB
+} as const;

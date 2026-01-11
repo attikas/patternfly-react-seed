@@ -1,19 +1,16 @@
 import * as React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
-import { Entity } from '@app/components/Entity';
 
-const ProfileSettings: React.FunctionComponent = () => {
-  useDocumentTitle('Profile Settings');
-
+const Entity: React.FunctionComponent = () => {
+  useDocumentTitle('General Settings');
   return (
     <PageSection hasBodyWrapper={false}>
       <Title headingLevel="h1" size="lg">
-        Profile Settings Page Title
+        Entity Page Title
       </Title>
-      <Entity />
     </PageSection>
   );
 };
 
-export { ProfileSettings };
+export { Entity };

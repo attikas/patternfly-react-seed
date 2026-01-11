@@ -1,13 +1,25 @@
-// types.ts
-export type CsvRow = Record<string, string>;
-
-export type CellError = {
-  row: number;
-  column: string;
-  message: string;
+/*
+export type SelectedCell = {
+  rowIndex: number;
+  colIndex: number;
+  value: string;
 };
+*/
 
-export type ValidationResult = {
-  rows: CsvRow[];
-  errors: CellError[];
-};
+export const ROW_INDEX = Symbol('rowIndex');
+
+export type CsvRow = Readonly<{
+  id: string;
+  values: readonly string[];
+  [ROW_INDEX]: number;
+}>;
+
+export type CsvParseResult = Readonly<{
+  headers: readonly string[];
+  rows: readonly CsvRow[];
+}>;
+
+export type SelectedCell = Readonly<{
+  rowIndex: number;
+  colIndex: number;
+}>;

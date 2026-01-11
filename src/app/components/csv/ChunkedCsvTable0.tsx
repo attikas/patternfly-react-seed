@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CsvRow } from './csv';
-import { ErrorMap } from './validation';
+import { ErrorMap } from './types';
 import { SelectedCell } from './selection';
 
 interface ChunkedCsvTableProps {
@@ -9,7 +9,7 @@ interface ChunkedCsvTableProps {
   onCellSelect?: (cell: SelectedCell) => void;
 }
 
-export function ChunkedCsvTable0({ rows, errors, onCellSelect }: ChunkedCsvTableProps) {
+export function ChunkedCsvTable({ rows, errors, onCellSelect }: ChunkedCsvTableProps) {
   return (
     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
       <thead>
@@ -38,7 +38,7 @@ export function ChunkedCsvTable0({ rows, errors, onCellSelect }: ChunkedCsvTable
                     backgroundColor: errors?.[row.__rowIndex]?.[col] ? '#fdd' : undefined,
                     cursor: 'pointer',
                   }}
-                  onClick={() => onCellSelect?.({ row: row.__rowIndex, col, value })}
+                  onClick={() => onCellSelect?.({ row: row.__rowIndex.toString(), col, value })}
                 >
                   {value}
                 </td>

@@ -1,13 +1,38 @@
-import React from 'react';
+import * as React from 'react';
 import { parseCsv } from './csv';
-import { validateRows } from './validation';
+import { CsvRow, SelectedCell } from './types';
+import { ChunkedCsvTable } from './ChunkedCsvTable';
 
-export function CsvUploadStep({ onLoaded }: Readonly<{ onLoaded: Function }>) {
+export function CsvUploadStep() {
+  const [rows, setRows] = React.useState<readonly CsvRow[] | undefined>(undefined);
+
+  const [selectedCell, setSelectedCell] = React.useState<SelectedCell | undefined>(undefined);
+
+  function onFileSelected(file: File) {
+    parseCsv(file, (result) => {
+      setRows(result.rows);
+      setSelectedCell(undefined);
+    });
+  }
+
   return (
-    <input
-      type="file"
-      accept=".csv"
-      onChange={(e) => e.target.files && parseCsv(e.target.files[0], (rows) => onLoaded(rows, validateRows(rows)))}
-    />
+    <>
+      <input
+        type="file"
+        accept=".csv"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) {
+            onFileSelected(file);
+          }
+        }}
+      />
+
+      <ChunkedCsvTable
+        rows={rows}
+        selectedCell={selectedCell}
+        onCellSelect={(rowIndex, colIndex) => setSelectedCell({ rowIndex, colIndex })}
+      />
+    </>
   );
 }

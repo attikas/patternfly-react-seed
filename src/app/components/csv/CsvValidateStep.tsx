@@ -21,7 +21,7 @@ import { UndoIcon } from '@patternfly/react-icons';
 
 import { ChunkedCsvTable } from './ChunkedCsvTable';
 import { CsvRow } from './csv';
-import { ErrorMap } from './validation';
+import { ErrorMap } from './types';
 import { SelectedCell } from './selection';
 import { BoxKey, VATBoxValue, VATBoxes, boxInputs } from '@app/constants/VatBox';
 

@@ -1,11 +1,11 @@
 import { CsvRow } from './types';
 
-export function resolveHeaders(rows: CsvRow[], headerRow?: number): string[] {
-  if (headerRow !== undefined && rows[headerRow]?.values) {
-    return rows[headerRow].values.map((v, i) => v?.trim() || `Column ${i + 1}`);
+export function resolveHeaders(rows?: CsvRow[]): string[] {
+  if (!Array.isArray(rows) || rows.length === 0) {
+    return [];
   }
 
-  const maxCols = rows.reduce((m, r) => Math.max(m, r.values?.length ?? 0), 0);
+  const maxCols = rows.reduce((max, r) => Math.max(max, r.values?.length ?? 0), 0);
 
   return Array.from({ length: maxCols }, (_, i) => `Column ${i + 1}`);
 }

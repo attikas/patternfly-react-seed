@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Dashboard } from '@app/Dashboard/Dashboard';
 import { EntityExplorer } from '@app/EntityExplorer/EntityExplorer';
+import { ManageEntities } from '@app/Manage/ManageEntities';
 import { Support } from '@app/Support/Support';
 import { GeneralSettings } from '@app/Settings/General/GeneralSettings';
 import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
@@ -29,9 +30,16 @@ const routes: AppRouteConfig[] = [
   {
     element: <Dashboard />,
     exact: true,
-    label: 'Dashboard',
+    label: 'Attikas Dashboard ',
     path: '/',
     title: 'Attikas | Main Dashboard',
+  },
+  {
+    element: <ManageEntities />,
+    exact: true,
+    label: 'Manage',
+    path: '/manage/ManageEntities',
+    title: 'Manage Entities',
   },
   {
     element: <EntityExplorer />,
@@ -50,6 +58,13 @@ const routes: AppRouteConfig[] = [
   {
     label: 'Settings',
     routes: [
+      {
+        element: <GeneralSettings />,
+        exact: true,
+        label: 'Entities',
+        path: '/settings/general',
+        title: 'Manage Entities',
+      },
       {
         element: <GeneralSettings />,
         exact: true,

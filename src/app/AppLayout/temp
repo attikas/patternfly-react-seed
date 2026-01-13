@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-  Breadcrumb,
-  BreadcrumbItem,
   Button,
   Masthead,
   MastheadBrand,
@@ -26,9 +24,9 @@ interface IAppLayout {
   children: React.ReactNode;
 }
 
-const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
+export const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
-  const crumbs = [{ label: 'Home', href: '/' }, { label: 'Support', href: '/support' }, { label: 'MTD Tips' }];
+
   const masthead = (
     <Masthead>
       <MastheadMain>
@@ -87,7 +85,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   );
 
   const Sidebar = (
-    <PageSidebar>
+    <PageSidebar isSidebarOpen={sidebarOpen}>
       <PageSidebarBody>{Navigation}</PageSidebarBody>
     </PageSidebar>
   );
@@ -110,12 +108,29 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
     <Page
       mainContainerId={pageId}
       masthead={masthead}
-      sidebar={sidebarOpen && Sidebar}
+      sidebar={
+        <PageSidebar>
+          <PageSidebarBody>{Navigation}</PageSidebarBody>
+        </PageSidebar>
+      }
       skipToContent={PageSkipToContent}
+      isManagedSidebar
     >
       {children}
     </Page>
   );
 };
 
-export { AppLayout };
+        <Masthead>
+          <MastheadMain>
+            <MastheadToggle>
+              <PageToggleButton
+                isSidebarOpen={sidebarOpen}
+                onSidebarToggle={() => setSidebarOpen(!sidebarOpen)}
+                aria-label="Global navigation"
+              />
+            </MastheadToggle>
+            <MastheadBrand>{/* logo */}</MastheadBrand>
+          </MastheadMain>
+          <KebabDropdownWithIconsV6 />
+        </Masthead>
